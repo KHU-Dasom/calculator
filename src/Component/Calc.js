@@ -3,7 +3,7 @@ import PadForNumber from "./CalculatorPad/PadForNumber";
 import PadForSymbol from "./CalculatorPad/PadForSymbol";
 import ScoreBoard from "./ScoreBoard/ScoreBoard";
 
-function Calc({ setHistories }) {
+function Calc({ setHistories, histories }) {
   const [Num1, setNum1] = useState("");
   const [Num2, setNum2] = useState("");
   const [Symbol, setSymbol] = useState("");
@@ -24,6 +24,7 @@ function Calc({ setHistories }) {
       alert("Wrong Method!");
       return;
     }
+    if (Num1.length === 0) return;
     if (Symbol.length === 0) setSymbol(key);
     else {
       equalKey("=");
@@ -65,6 +66,10 @@ function Calc({ setHistories }) {
         default:
           result = tempNum1;
       }
+      var historymanager = [];
+      Object.values(histories).forEach((item) => historymanager.push(item));
+      historymanager.push(`${Board} = ${result}`);
+      setHistories(historymanager);
       setNum1(result.toString());
       setNum2("");
       setSymbol("");
