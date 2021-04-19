@@ -4,13 +4,44 @@ import NumberPad from "./NumberPad";
 import OperatorPad from "./OperatorPad";
 
 function KeyPad({ first, second, operator, setFirst, setSecond, setOperator }) {
-  const number = operator === "" ? first : second;
-  const set = operator === "" ? (i) => setFirst(i) : (i) => setSecond(i);
+  const number = operator === "" || operator === "=" ? first : second;
+  const set =
+    operator === "" || operator === "="
+      ? (i) => setFirst(i)
+      : (i) => setSecond(i);
 
   function clear_all() {
     setFirst(0);
     setSecond(0);
     setOperator("");
+  }
+
+  function change_oper(oper) {
+    if (operator === "") setOperator(oper);
+    else {
+      let result;
+      switch (operator) {
+        case "+":
+          result = first + second;
+          break;
+        case "-":
+          result = first - second;
+          break;
+        case "*":
+          result = first * second;
+          break;
+        case "÷":
+          result = first / second;
+          break;
+        default:
+          console.log("Error!");
+      }
+      console.log(result);
+      setFirst(result);
+      setSecond(0);
+      if (oper === "=") setOperator("");
+      else setOperator(oper);
+    }
   }
 
   return (
@@ -23,7 +54,7 @@ function KeyPad({ first, second, operator, setFirst, setSecond, setOperator }) {
         ></Button>
         <NumberPad number={number} set={set}></NumberPad>
       </div>
-      <OperatorPad set={(i) => setOperator(i)}></OperatorPad>
+      <OperatorPad set={(i) => change_oper(i)}></OperatorPad>
     </div>
   );
 }
