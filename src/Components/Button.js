@@ -2,7 +2,7 @@ import React from "react";
 
 function Button(props) {
   return (
-    <div OnClick={props.Onclick} className="button button--{props.shape}">
+    <div onClick={props.Onclick} className={"button " + props.shape}>
       {props.value}
     </div>
   );
