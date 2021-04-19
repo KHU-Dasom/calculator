@@ -13,11 +13,8 @@ function KeyPad({
   histories,
   setHistories,
 }) {
-  const number = operator === "" || operator === "=" ? first : second;
-  const set =
-    operator === "" || operator === "="
-      ? (i) => setFirst(i)
-      : (i) => setSecond(i);
+  const number = operator === "" ? first : second;
+  const set = operator === "" ? (i) => setFirst(i) : (i) => setSecond(i);
 
   function clear_all() {
     setFirst(0);
@@ -42,13 +39,18 @@ function KeyPad({
         case "÷":
           result = first / second;
           break;
+        case "=":
+          result = second;
+          break;
         default:
           console.log("Error!");
       }
-      setHistories([
-        ...histories,
-        first + " " + operator + " " + second + " = " + result,
-      ]);
+      if (operator !== "=") {
+        setHistories([
+          ...histories,
+          first + " " + operator + " " + second + " = " + result,
+        ]);
+      }
       setFirst(result);
       setSecond(0);
       if (oper === "=") setOperator("");
