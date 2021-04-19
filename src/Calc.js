@@ -1,5 +1,6 @@
 import React from "react";
 import NumberPad from "./Components/NumberPad";
+import OperatorPad from "./Components/OperatorPad";
 
 function Calc({ setHistories }) {
   return (
@@ -11,13 +12,7 @@ function Calc({ setHistories }) {
           <div className="button calc__keyboard__ac">AC</div>
           <NumberPad></NumberPad>
         </div>
-        <div className="calc__keyboard__operator">
-          <div className="button button--deepblue">+</div>
-          <div className="button button--deepblue">-</div>
-          <div className="button button--deepblue">×</div>
-          <div className="button button--deepblue">÷</div>
-          <div className="button button--pink">=</div>
-        </div>
+        <OperatorPad></OperatorPad>
       </div>
     </div>
   );
