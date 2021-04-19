@@ -47,13 +47,7 @@ function KeyPad({
       }
       setHistories([
         ...histories,
-        String(first) +
-          " " +
-          operator +
-          " " +
-          String(second) +
-          " = " +
-          String(result),
+        first + " " + operator + " " + second + " = " + result,
       ]);
       setFirst(result);
       setSecond(0);

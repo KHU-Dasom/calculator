@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import KeyPad from "./Components/KeyPad";
+import Score from "./Components/Score";
 
 function Calc({ histories, setHistories }) {
   const [first, setFirst] = useState(0);
@@ -10,7 +11,7 @@ function Calc({ histories, setHistories }) {
   return (
     <div className="calc">
       <div className="calc__title">Calculator</div>
-      <div className="calc__score">{first + operator + second}</div>
+      <Score first={first} second={second} operator={operator}></Score>
       <KeyPad
         first={first}
         second={second}
