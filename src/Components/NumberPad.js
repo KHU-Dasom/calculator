@@ -3,9 +3,6 @@ import Button from "./Button";
 
 function NumberPad({ number, set }) {
   function add_number(value) {
-    console.log(1);
-    console.log(set);
-    console.log(number);
     set(number * 10 + value);
   }
 

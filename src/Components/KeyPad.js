@@ -3,7 +3,16 @@ import Button from "./Button";
 import NumberPad from "./NumberPad";
 import OperatorPad from "./OperatorPad";
 
-function KeyPad({ first, second, operator, setFirst, setSecond, setOperator }) {
+function KeyPad({
+  first,
+  second,
+  operator,
+  setFirst,
+  setSecond,
+  setOperator,
+  histories,
+  setHistories,
+}) {
   const number = operator === "" || operator === "=" ? first : second;
   const set =
     operator === "" || operator === "="
@@ -27,7 +36,7 @@ function KeyPad({ first, second, operator, setFirst, setSecond, setOperator }) {
         case "-":
           result = first - second;
           break;
-        case "*":
+        case "x":
           result = first * second;
           break;
         case "÷":
@@ -36,7 +45,16 @@ function KeyPad({ first, second, operator, setFirst, setSecond, setOperator }) {
         default:
           console.log("Error!");
       }
-      console.log(result);
+      setHistories([
+        ...histories,
+        String(first) +
+          " " +
+          operator +
+          " " +
+          String(second) +
+          " = " +
+          String(result),
+      ]);
       setFirst(result);
       setSecond(0);
       if (oper === "=") setOperator("");

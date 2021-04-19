@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import KeyPad from "./Components/KeyPad";
 
-function Calc({ setHistories }) {
+function Calc({ histories, setHistories }) {
   const [first, setFirst] = useState(0);
   const [second, setSecond] = useState(0);
   const [operator, setOperator] = useState("");
@@ -18,6 +18,8 @@ function Calc({ setHistories }) {
         setFirst={(i) => setFirst(i)}
         setSecond={(i) => setSecond(i)}
         setOperator={(i) => setOperator(i)}
+        histories={histories}
+        setHistories={(i) => setHistories(i)}
       ></KeyPad>
     </div>
   );
