@@ -1,18 +1,18 @@
 import React from "react";
 import Button from "./Button";
 
-function OperatorPad() {
+function OperatorPad({ set }) {
   return (
     <div className="calc__keyboard__operator">
       {["+", "-", "x", "÷"].map((i) => (
         <Button
-          Onclick={() => console.log(i)}
+          Onclick={() => set(i)}
           shape="button--deepblue"
           value={i}
         ></Button>
       ))}
       <Button
-        Onclick={() => console.log("=")}
+        Onclick={() => set("=")}
         shape="button--pink"
         value={"="}
       ></Button>
