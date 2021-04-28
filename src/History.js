@@ -5,8 +5,8 @@ function History({ histories }) {
     <div className="history">
       <div className="history__title">History</div>
       <table className="history__table">
-        {histories.map((history) => (
-          <tr>{history}</tr>
+        {histories.map((history, key) => (
+          <tr key={key}>{history}</tr>
         ))}
       </table>
     </div>

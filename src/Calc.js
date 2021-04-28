@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import History from './History';
 
 const numbers = [
   ['1', '2', '3'],
@@ -7,7 +6,7 @@ const numbers = [
   ['7', '8', '9'],
 ];
 
-const sings = ['+', '-', 'x', '÷', '='];
+const signs = ['+', '-', 'x', '÷', '='];
 
 function Calc({ setHistories }) {
   // 관리해야 할 것.
@@ -33,106 +32,105 @@ function Calc({ setHistories }) {
 
   const onClickSign = (e) => {
     const inputSign = e.target.value;
+
     if (inputSign === 'ac') {
       setAmount('0');
       setNumInput('0');
       setSign('');
       setValid(false);
     } else {
-      switch (sign) {
-        case '':
-          setAmount(numInput);
-          setNumInput('0');
-          if (inputSign === '=') setSign('');
-          else setSign(inputSign);
-          setValid(false);
-          break;
-        case '+':
-          setAmount((prevValue) =>
-            String(Number(prevValue) + Number(numInput)),
-          );
-          setHistories((prevHistroy) =>
-            prevHistroy.concat(
-              amount +
-                sign +
-                numInput +
-                '=' +
-                String(Number(amount) + Number(numInput)),
-            ),
-          );
-          setNumInput('0');
-          if (inputSign === '=') setSign('+');
-          else setSign(inputSign);
-          setValid(false);
-          break;
-        case '-':
-          setAmount((prevValue) =>
-            String(Number(prevValue) - Number(numInput)),
-          );
-          setNumInput('0');
-          if (inputSign === '=') setSign('-');
-          else setSign(inputSign);
-          setValid(false);
-          setHistories((prevHistroy) =>
-            prevHistroy.concat(
-              amount +
-                sign +
-                numInput +
-                '=' +
-                String(Number(amount) - Number(numInput)),
-            ),
-          );
-          break;
-        case 'x':
-          setAmount((prevValue) =>
-            String(Number(prevValue) * Number(numInput)),
-          );
-          if (inputSign === '=') {
-            setSign('x');
-            setNumInput('1');
-          } else {
-            setSign(inputSign);
-            setNumInput('0');
-          }
-          setValid(false);
-          setHistories((prevHistroy) =>
-            prevHistroy.concat(
-              amount +
-                sign +
-                numInput +
-                '=' +
-                String(Number(amount) * Number(numInput)),
-            ),
-          );
-          break;
-        case '÷':
-          setAmount((prevValue) =>
-            String(Number(prevValue) / Number(numInput)),
-          );
-          if (inputSign === '=') {
-            setSign('÷');
-            setNumInput('1');
-          } else {
-            setSign(inputSign);
-            setNumInput('0');
-          }
-          setHistories((prevHistroy) =>
-            prevHistroy.concat(
-              amount +
-                sign +
-                numInput +
-                '=' +
-                String(Number(amount) / Number(numInput)),
-            ),
-          );
-          setValid(false);
-
-          break;
-        default:
-          break;
-      }
+      calculation(inputSign);
+      setValid(false);
     }
   };
+
+  function calculation(inputSign) {
+    var result = null;
+    switch (sign) {
+      case '':
+        setAmount(numInput);
+        setNumInput('0');
+        if (inputSign === '=') setSign('');
+        else setSign(inputSign);
+        break;
+
+      case '+':
+        result = String(Number(amount) + Number(numInput));
+        if (numInput !== '0')
+          setHistories((prevHistroy) =>
+            prevHistroy.concat(`${amount} ${sign} ${numInput} = ${result}`),
+          );
+
+        if (inputSign === '=') {
+          setSign('+');
+        } else {
+          setSign(inputSign);
+        }
+
+        setAmount(result);
+        setNumInput('0');
+        break;
+
+      case '-':
+        result = String(Number(amount) - Number(numInput));
+        if (numInput !== '0')
+          setHistories((prevHistroy) =>
+            prevHistroy.concat(`${amount} ${sign} ${numInput} = ${result}`),
+          );
+
+        if (inputSign === '=') {
+          setSign('-');
+        } else {
+          setSign(inputSign);
+        }
+
+        setAmount(result);
+        setNumInput('0');
+        break;
+
+      case 'x':
+        result = String(Number(amount) * Number(numInput));
+
+        if (numInput !== '1' && numInput !== '0')
+          setHistories((prevHistroy) =>
+            prevHistroy.concat(`${amount} ${sign} ${numInput} = ${result}`),
+          );
+        if (inputSign === '=') {
+          setSign('x');
+          setNumInput('1');
+        } else {
+          setSign(inputSign);
+          setNumInput('0');
+        }
+        setAmount(result);
+        break;
+
+      case '÷':
+        result = String(Number(amount) / Number(numInput));
+        if (numInput === '0') {
+          alert('÷0 은 유효하지 않은 연산입니다.');
+          setNumInput(amount);
+          setSign('');
+          break;
+        }
+        if (numInput !== '1' && numInput !== '0')
+          setHistories((prevHistroy) =>
+            prevHistroy.concat(`${amount} ${sign} ${numInput} = ${result}`),
+          );
+        if (inputSign === '=') {
+          setSign('÷');
+          setNumInput('1');
+        } else {
+          setSign(inputSign);
+          setNumInput('0');
+        }
+        setAmount(result);
+        break;
+
+      default:
+        break;
+    }
+  }
 
   return (
     <div className="calc">
@@ -158,7 +156,7 @@ function Calc({ setHistories }) {
                   >
                     {num}
                   </button>
-                ))}{' '}
+                ))}
               </div>
             ))}
           </div>
@@ -171,7 +169,7 @@ function Calc({ setHistories }) {
           </button>
         </div>
         <div className="calc__keyboard__operator">
-          {sings.map((sign) => (
+          {signs.map((sign) => (
             <button
               className="button button--deepblue"
               value={sign}
