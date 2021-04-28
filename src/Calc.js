@@ -33,7 +33,6 @@ function Calc({ setHistories }) {
 
   const onClickSign = (e) => {
     const inputSign = e.target.value;
-
     if (inputSign === 'ac') {
       setAmount('0');
       setNumInput('0');
@@ -52,6 +51,15 @@ function Calc({ setHistories }) {
           setAmount((prevValue) =>
             String(Number(prevValue) + Number(numInput)),
           );
+          setHistories((prevHistroy) =>
+            prevHistroy.concat(
+              amount +
+                sign +
+                numInput +
+                '=' +
+                String(Number(amount) + Number(numInput)),
+            ),
+          );
           setNumInput('0');
           if (inputSign === '=') setSign('+');
           else setSign(inputSign);
@@ -65,6 +73,15 @@ function Calc({ setHistories }) {
           if (inputSign === '=') setSign('-');
           else setSign(inputSign);
           setValid(false);
+          setHistories((prevHistroy) =>
+            prevHistroy.concat(
+              amount +
+                sign +
+                numInput +
+                '=' +
+                String(Number(amount) - Number(numInput)),
+            ),
+          );
           break;
         case 'x':
           setAmount((prevValue) =>
@@ -78,19 +95,38 @@ function Calc({ setHistories }) {
             setNumInput('0');
           }
           setValid(false);
+          setHistories((prevHistroy) =>
+            prevHistroy.concat(
+              amount +
+                sign +
+                numInput +
+                '=' +
+                String(Number(amount) * Number(numInput)),
+            ),
+          );
           break;
         case '÷':
           setAmount((prevValue) =>
             String(Number(prevValue) / Number(numInput)),
           );
           if (inputSign === '=') {
-            setSign('x');
+            setSign('÷');
             setNumInput('1');
           } else {
             setSign(inputSign);
             setNumInput('0');
           }
+          setHistories((prevHistroy) =>
+            prevHistroy.concat(
+              amount +
+                sign +
+                numInput +
+                '=' +
+                String(Number(amount) / Number(numInput)),
+            ),
+          );
           setValid(false);
+
           break;
         default:
           break;

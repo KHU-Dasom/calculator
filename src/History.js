@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
-function History() {
+function History({ histories }) {
   return (
     <div className="history">
       <div className="history__title">History</div>
       <table className="history__table">
-        <tr>
-          <td>3 + 5 = 8</td>
-        </tr>
+        {histories.map((history) => (
+          <tr>{history}</tr>
+        ))}
       </table>
     </div>
   );
