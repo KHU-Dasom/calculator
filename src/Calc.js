@@ -14,7 +14,6 @@ function Calc({ setHistories }) {
   const [numInput, setNumInput] = useState('0');
   const [sign, setSign] = useState('');
   const [amount, setAmount] = useState('0');
-
   // 총 결과를 보여줄지, 아니면 현재 입력하는 숫자를 보여줄지
   // 입력하는 숫자를 보여준다면 true, 총 결과면 false
   const [valid, setValid] = useState(true);
@@ -146,12 +145,13 @@ function Calc({ setHistories }) {
             AC
           </button>
           <div className="calc__keyboard__number">
-            {numbers.map((line) => (
-              <div class="calc__keyboard__number__line">
-                {line.map((num) => (
+            {numbers.map((line, idx) => (
+              <div key={`line-${idx}`} className="calc__keyboard__number__line">
+                {line.map((num, idx) => (
                   <button
                     className="button button--blue"
                     value={num}
+                    key={`number-${idx}`}
                     onClick={onClickNum}
                   >
                     {num}
@@ -169,10 +169,11 @@ function Calc({ setHistories }) {
           </button>
         </div>
         <div className="calc__keyboard__operator">
-          {signs.map((sign) => (
+          {signs.map((sign, idx) => (
             <button
               className="button button--deepblue"
               value={sign}
+              key={`sign-${idx}`}
               onClick={onClickSign}
             >
               {sign}
