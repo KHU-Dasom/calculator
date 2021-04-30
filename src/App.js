@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <div className="Container">
-        <Calc histories={histories} setHistories={setHistories} />
+        <Calc setHistories={setHistories} />
         <History histories={histories} />
       </div>
     </div>

@@ -10,7 +10,6 @@ function KeyPad({
   setFirst,
   setSecond,
   setOperator,
-  histories,
   setHistories,
 }) {
   const number = operator === "" ? first : second;
@@ -46,8 +45,8 @@ function KeyPad({
           console.log("Error!");
       }
       if (operator !== "=") {
-        setHistories([
-          ...histories,
+        setHistories((prevHistory) => [
+          ...prevHistory,
           first + " " + operator + " " + second + " = " + result,
         ]);
       }
