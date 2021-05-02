@@ -1,14 +1,10 @@
 import React from "react";
 
-function History() {
+function History(props) {
   return (
     <div className="history">
       <div className="history__title">History</div>
-      <table className="history__table">
-        <tr>
-          <td>3 + 5 = 8</td>
-        </tr>
-      </table>
+      <table className="history__table">{props.histories}</table>
     </div>
   );
 }

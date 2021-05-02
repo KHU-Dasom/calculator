@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Calc({ setHistories }) {
+function Calc({ setHistories, histories }) {
   const numList = (arr) =>
     arr.map((num) => (
       <button
@@ -80,18 +80,31 @@ function Calc({ setHistories }) {
   };
 
   const calculate = (left, right, operator) => {
+    let answer = 0;
     switch (operator) {
       case "+":
-        return Number(right) + Number(left);
+        answer = Number(right) + Number(left);
+        break;
       case "-":
-        return Number(left) - Number(right);
+        answer = Number(left) - Number(right);
+        break;
       case "×":
-        return Number(left) * Number(right);
+        answer = Number(left) * Number(right);
+        break;
       case "÷":
-        return Number(left) / Number(right);
+        answer = Number(left) / Number(right);
+        break;
       default:
-        return "error";
+        answer = "error";
     }
+
+    const newHistory = (
+      <tr>
+        <td>{left + operator + right + " = " + answer}</td>
+      </tr>
+    );
+    setHistories([...histories, newHistory]);
+    return answer;
   };
 
   return (
