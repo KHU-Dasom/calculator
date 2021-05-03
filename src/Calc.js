@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Calc({ setHistories, histories }) {
+function Calc({ setHistories }) {
   const numList = (arr) =>
     arr.map((num) => (
       <button
@@ -103,7 +103,7 @@ function Calc({ setHistories, histories }) {
         <td>{left + operator + right + " = " + answer}</td>
       </tr>
     );
-    setHistories([...histories, newHistory]);
+    setHistories((array) => [...array, newHistory]);
     return answer;
   };
 
