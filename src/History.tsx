@@ -1,6 +1,6 @@
 import React from "react";
 
-function History(props) {
+function History(props:any):JSX.Element {
   return (
     <div className="history">
       <div className="history__title">History</div>

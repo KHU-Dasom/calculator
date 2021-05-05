@@ -4,7 +4,8 @@ import Calc from "./Calc";
 import History from "./History";
 
 function App() {
-  const [histories, setHistories] = useState([]);
+  const [histories, setHistories] = useState<JSX.Element[]>([]);
+
   return (
     <div className="App">
       <div className="Container">
