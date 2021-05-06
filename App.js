@@ -1,22 +1,28 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, SafeAreaView, View } from 'react-native';
 import Calc from './Calc';
 import History from './History';
 
 export default function App() {
   const [histories, setHistories] = useState([]);
   return (
-    <View style={styles.App}>
-      <View style={[styles.App, styles.container]}>
-        <Calc setHistories={setHistories} />
-        <History histories={histories} />
+    <SafeAreaView style={styles.warp}>
+      <View style={styles.App}>
+        <View style={[styles.App, styles.container]}>
+          <Calc setHistories={setHistories} />
+          <History histories={histories} />
+        </View>
       </View>
-    </View>
+      <StatusBar style="light" />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  wrap: {
+    flex: 1,
+  },
   App: {
     height: '100%',
     display: 'flex',

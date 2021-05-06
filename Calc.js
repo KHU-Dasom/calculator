@@ -4,7 +4,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
@@ -51,11 +50,6 @@ function Calc({ setHistories }) {
       setValid(false);
     }
   };
-
-  const createThreeButtonAlert = () =>
-    Alert.alert('divide 0 error', '0으로 숫자를 나눌 수 없습니다', [
-      { text: 'OK' },
-    ]);
 
   function calculation(inputSign) {
     var result = null;
@@ -121,8 +115,9 @@ function Calc({ setHistories }) {
       case '÷':
         result = String(Number(amount) / Number(numInput));
         if (numInput === '0') {
-          console.log('악');
-          createThreeButtonAlert();
+          Alert.alert('divide 0 error', '0으로 숫자를 나눌 수 없습니다', [
+            { text: 'OK' },
+          ]);
           setNumInput(amount);
           setSign('');
           break;
