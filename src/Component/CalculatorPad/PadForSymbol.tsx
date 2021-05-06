@@ -1,7 +1,12 @@
 import React from "react";
 import Calcbutton from "./Calcbutton";
 
-function PadForSymbol({ symbolKey, equalKey }) {
+interface IPadForSymbolProps {
+  symbolKey(key: string): void;
+  equalKey(key: string): void;
+}
+
+const PadForSymbol: React.FC<IPadForSymbolProps> = ({ symbolKey, equalKey }) => {
   const blueButtonIdx = ["+", "-", "×", "÷"];
   const numberLine = blueButtonIdx.map((value, idx) => (
     <Calcbutton

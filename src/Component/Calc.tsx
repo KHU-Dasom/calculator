@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React, {Dispatch, SetStateAction, useState} from "react";
 import PadForNumber from "./CalculatorPad/PadForNumber";
 import PadForSymbol from "./CalculatorPad/PadForSymbol";
 import ScoreBoard from "./ScoreBoard/ScoreBoard";
 
-function Calc({ setHistories, histories }) {
-  const [Num1, setNum1] = useState("");
-  const [Num2, setNum2] = useState("");
-  const [Symbol, setSymbol] = useState("");
-  const [Board, setBoard] = useState("");
+//TODO 여기부터 고치기
 
-  function numberkey(key) {
-    // debugger;
+interface ICalcProps {
+  setHistories: React.Dispatch<React.SetStateAction<string[]>>;
+  histories: string[];
+}
+
+const Calc: React.FC<ICalcProps> = ({ setHistories, histories }) => {
+  const [Num1, setNum1] = useState("" as string);
+  const [Num2, setNum2] = useState("" as string);
+  const [Symbol, setSymbol] = useState("" as string);
+  const [Board, setBoard] = useState("" as string);
+
+  function numberkey(key: number) {
     if (key < 0 || key > 10) {
       alert("Wrong Method!");
       return;
@@ -18,7 +24,7 @@ function Calc({ setHistories, histories }) {
     Symbol.length === 0 ? setNum1(Num1 + key) : setNum2(Num2 + key);
   }
 
-  function symbolKey(key) {
+  function symbolKey(key : string) {
     const availableSymbol = ["+", "-", "×", "÷"];
     if (availableSymbol.find((val) => val === key) === undefined) {
       alert("Wrong Method!");
@@ -32,7 +38,7 @@ function Calc({ setHistories, histories }) {
     }
   }
 
-  function equalKey(key) {
+  function equalKey(key: string) {
     if (key !== "=") {
       alert("Wrong Method!");
     } else if (Num1 === "") {
@@ -66,10 +72,7 @@ function Calc({ setHistories, histories }) {
         default:
           result = tempNum1;
       }
-      var historymanager = [];
-      Object.values(histories).forEach((item) => historymanager.push(item));
-      historymanager.push(`${Board} = ${result}`);
-      setHistories(historymanager);
+      setHistories([...histories, `${Board} = ${result}`]);
       setNum1(result.toString());
       setNum2("");
       setSymbol("");
@@ -102,7 +105,16 @@ function Calc({ setHistories, histories }) {
   );
 }
 
-function ACButton({ setNum1, setNum2, setSymbol, setBoard }) {
+interface IACButton {
+  setNum1: Dispatch<SetStateAction<string>>;
+  setNum2: Dispatch<SetStateAction<string>>;
+  setSymbol: Dispatch<SetStateAction<string>>;
+  setBoard: Dispatch<SetStateAction<string>>;
+
+}
+
+
+const ACButton: React.FC<IACButton> = ({ setNum1, setNum2, setSymbol, setBoard }) => {
   function Clear() {
     setNum1("");
     setNum2("");
