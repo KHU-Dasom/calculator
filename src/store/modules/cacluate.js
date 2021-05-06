@@ -3,12 +3,12 @@ import { calc } from "./operator";
 // 액션 타입 정의
 const SET_NUMBER = "calculate/SETNUMBER";
 const SET_OPERATOR = "calculate/SETOPERATOR";
-const ADD_HISTORY = "history/ADD";
+const CLEAR = "calculate/CLEAR";
 
 // 액션 생성 함수 정의
 export const setNumber = (number) => ({ type: SET_NUMBER, number });
 export const setOperator = (operator) => ({ type: SET_OPERATOR, operator });
-export const addHistory = () => ({ type: ADD_HISTORY });
+export const clear = () => ({ type: CLEAR });
 
 // 초기 상태 정의
 const initialState = {
@@ -55,8 +55,13 @@ export default function calculate(state = initialState, action) {
           ],
         };
       }
-    case ADD_HISTORY:
-      return;
+    case CLEAR:
+      return {
+        ...state,
+        first: 0,
+        second: 0,
+        operator: "",
+      };
     default:
       return state;
   }
