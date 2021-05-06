@@ -2,6 +2,7 @@ import React from "react";
 import Button from "./Button";
 import NumberPad from "./NumberPad";
 import NumberPadContainer from "../Container/NumberPadContainer";
+import OperatorPadContainer from "../Container/OperatorContainer";
 import OperatorPad from "./OperatorPad";
 
 function KeyPad({
@@ -68,7 +69,7 @@ function KeyPad({
         ></Button>
         <NumberPadContainer />
       </div>
-      <OperatorPad set={(i) => change_oper(i)}></OperatorPad>
+      <OperatorPadContainer />
     </div>
   );
 }

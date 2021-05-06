@@ -4,7 +4,6 @@ import Button from "./Button";
 function NumberPad({ onSetNumber }) {
   return (
     <div className="calc__keyboard__number">
-      {console.log(onSetNumber)}
       {[0, 1, 2].map((i) => (
         <div className="calc__keyboard__number__line">
           {[1, 2, 3].map((j) => (
