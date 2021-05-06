@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "./Button";
 import NumberPad from "./NumberPad";
+import NumberPadContainer from "../Container/NumberPadContainer";
 import OperatorPad from "./OperatorPad";
 
 function KeyPad({
@@ -65,7 +66,7 @@ function KeyPad({
           shape="calc__keyboard__ac"
           value="AC"
         ></Button>
-        <NumberPad number={number} set={set}></NumberPad>
+        <NumberPadContainer />
       </div>
       <OperatorPad set={(i) => change_oper(i)}></OperatorPad>
     </div>

@@ -1,18 +1,15 @@
 import React from "react";
 import Button from "./Button";
 
-function NumberPad({ number, set }) {
-  function add_number(value) {
-    set(number * 10 + value);
-  }
-
+function NumberPad({ onSetNumber }) {
   return (
     <div className="calc__keyboard__number">
+      {console.log(onSetNumber)}
       {[0, 1, 2].map((i) => (
         <div className="calc__keyboard__number__line">
           {[1, 2, 3].map((j) => (
             <Button
-              Onclick={() => add_number(i * 3 + j)}
+              Onclick={() => onSetNumber(i * 3 + j)}
               shape="button--blue"
               value={i * 3 + j}
             ></Button>
@@ -20,7 +17,7 @@ function NumberPad({ number, set }) {
         </div>
       ))}
       <Button
-        Onclick={() => add_number(0)}
+        Onclick={() => onSetNumber(0)}
         shape="button--blue--big"
         value={0}
       ></Button>
